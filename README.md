@@ -1,4 +1,5 @@
 Originally written for the FreeBSD Operating System
+- Modified Makefile to work on MacOS/Linux 
 
 Note: Need to run as root to use some commands such as cat
 
