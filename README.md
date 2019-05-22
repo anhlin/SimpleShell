@@ -1,18 +1,9 @@
-CMPS111 - Assignment 1: A Simple Shell
-Anthony Lin (anhlin)
-
 Files Included:
 - lex.l: generates lexical analyzer with flex 
 - myshell.c: main code for the shell
 - Makefile: compiles files with flags, generates lex.yy.c, .o file, and executable 
 	    when "make" is entered. Must "make clean" before making again.
 - DESIGN.txt: Description of the design of the program. 
-
-INFER:
-- This was a useful tool, it helped me find some null dereferences, leaks, and uninitialized values
-- I was able to fix all of them, so infer now shows no errors when running "infer -- make" 
-- Although there were a bunch of "SIL to HIL" errors when running it on OSX. 
-- Probably from the lex.yy.c file. 
 
 Implemented:
 1. exit command which terminates the shell
@@ -37,5 +28,3 @@ Notes:
 - There may be memory leaks, as I am relatively new to C and using malloc(). 
 - The prompt (">") for the shell has some weird behavior after using piping commands.
 - Makefile does not run the flags on the lex.yy.c file
-
-Thank You
