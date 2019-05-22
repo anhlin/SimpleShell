@@ -1,0 +1,93 @@
+Design Document 
+CMPS111 (Prof. Darrell Long) 
+Assignment 1: A Simple Shell
+Anthony Lin (anhlin)
+
+Implemented:
+1. exit command which terminates the shell
+2. All commands with no arguments.
+3. Command with arguments
+4. Command with/without arguments, whose output is redirected to a file
+5. Command with/without arguments, whose output is appended to a file
+6. Command with/without arguments, whose input is redirected from a file
+7. Command with/without arguments, whose output is piped to the input of another command,
+   whose output is further piped to the input of another command.
+
+Also implemented:
+- Multiple commands separated by semicolons
+- Piping with two commands
+- Error checking for bad/failed commands
+
+Not implemented:
+- Multiple redirection, e.g. wc -l < file >> file2
+- More than three commands with piping
+
+Pseudocode (myshell.c) 
+
+Main While Loop
+While(true):
+	Check for piping
+		count number of pipes
+	Check for semicolons
+		run each command individually
+	Call main execution function
+	
+	Call respective piping function (2 or 3 commands)
+
+Main Execution Method: void exec_cmd(char** cmd, int numArgs)
+Arguments: 
+- char** cmd: an individual command
+- numArgs: number of arguments in the command
+
+Logic: 
+- Check for exit, cd manually
+- check if redirecting or reading from a file
+- if not redirecting, do standard exec
+	- fork() and run execvp
+- if ">" or ">>" go to "exec_file" function and pass left side of command
+- if "<" go to "read_file" function
+
+Writing to a File Function : exec_file
+Arguments: 
+- char** command: portion of original command that was on the left 
+  hand side of the ">" or ">>"
+- char* filename: name of the file to be written to 
+- bool append: if appending to file, will be true
+
+Logic: 
+- fork()
+- Check if appending 
+	- if so, use O_APPEND to open()
+	- else, use O_TRUNC
+- use dup to duplicate stdout and redirect to file
+- close the file descriptor
+
+Read File Function : read_file
+Arguments: 
+- char **args: portion of original command that was on the left hand side
+- *filename: name of file to be read from
+
+Logic:
+- Same as exec_file()
+	- instead, dup2 on stdin (0). 
+
+Function for two commands w/ piping: exec_pipe_2
+Arguments: 
+- char** args: same as args in main
+
+Logic: 
+- Parse args to get commands, place in new arrays
+- Start two forks
+- Run first command, and pipe to second
+- parent waits 
+- clear arrays
+
+Function for three commands w/ piping: exec_pipe
+Arguments:
+- char **args: same as args in main
+
+Logic:
+- Similar to exec_pipe_2
+- Fill three arrays with the commands 
+- three forks
+- run first command, read from it for second, read from second for third command. 
