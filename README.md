@@ -1,5 +1,7 @@
 Originally written for the FreeBSD Operating System
 
+Note: Need to run as root to use some commands such as cat
+
 Files Included:
 - lex.l: generates lexical analyzer with flex 
 - myshell.c: main code for the shell
