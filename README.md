@@ -1,3 +1,5 @@
+Originally written for the FreeBSD Operating System
+
 Files Included:
 - lex.l: generates lexical analyzer with flex 
 - myshell.c: main code for the shell
