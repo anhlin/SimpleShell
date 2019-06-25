@@ -1,5 +1,6 @@
 Originally written for the FreeBSD Operating System
 - Modified Makefile to work on MacOS/Linux 
+- To run on FreeBSD, change the -ll flag to -lfl in the Makefile
 
 Note: Need to run as root to use some commands such as cat
 
