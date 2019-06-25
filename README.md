@@ -30,6 +30,5 @@ Not implemented:
 - More than three commands with piping
 
 Notes:
-- There may be memory leaks, as I am relatively new to C and using malloc(). 
 - The prompt (">") for the shell has some weird behavior after using piping commands.
 - Makefile does not run the flags on the lex.yy.c file
