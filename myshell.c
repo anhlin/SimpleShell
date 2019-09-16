@@ -16,15 +16,11 @@ void read_file(char** args, char* filename);
 void exec_pipe(char** args);
 void exec_pipe_2(char** args);
 int main() {
-	int i;
-	int j;
-	int k;
-	int prev; 
+	int i, j, k, prev; //Initialize iterators 
 	int numArgs; 
 	int numPipes; 
 	bool isPiping; 
-	char **args;
-	char **args2;	
+	char **args, **args2; 
 	printf("> "); 
 	
 	//Main while loop
@@ -91,16 +87,15 @@ int main() {
 
 //Main execution function
 void exec_cmd(char** cmd, int numArgs){
-	bool to_file;
-	bool append_file;	
-	bool in_file;
+	//Flags for writing, appending, or reading a file
+	bool to_file, append_file, in_file;
+	to_file = false;
+	append_file = false;
+	in_file = false;
 	int i;
 	int at;
 	char **command; 
 	char *filename; 
-	to_file = false;
-	append_file = false;
-	in_file = false;
 	at = 0;
 	//exit command
 	if(cmd != NULL){
@@ -297,11 +292,8 @@ void exec_pipe_2(char** args){
 
 //method to execute three commands w/ piping
 void exec_pipe(char** args){
-	char** cmd1; 
-	char** cmd2; 
-	char** cmd3; 
-	int i;
-        int j; 	
+	char** cmd1, cmd2, cmd3; 
+	int i, j; 	
 	int pipeIndex1 = 0;
 	int pipeIndex2 = 0; 
 	int numArgs = 0; 	
